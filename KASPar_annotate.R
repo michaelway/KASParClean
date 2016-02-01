@@ -1,7 +1,7 @@
 #' Process a SNPs cleaned genotype data from csv format
 #' @param csv The name of the input csv file
 #' @param RefMajor - The reference major allele (e.g. A, G, T, C)
-#' @param RefMinor - The reference mino allele (e.g. A, G, T, C)
+#' @param RefMinor - The reference minor allele (e.g. A, G, T, C)
 #' @param rsid - The SNP identification number (is used to name the output)
 #' @param direction - The direction of the allele codes (e.g. FWD, REV)
 #' @return A text file with genotype and allele annotations
