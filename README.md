@@ -32,15 +32,17 @@ head SNP1.txt
 ```
 **N.B. It is important that the "Sample Name" and "Call" columns are correctly filled out for later stages.**
 
-###Run Script
+###Run Function
 
-Set the working directory to the location of your 
+Set the working directory to the location of your input data and run the KASPar_process() function on your input text file.
 ```
 KASPar_process("SNP1.txt")
 ```
 This will produce two files:
-1. A log file with a summary of the dataset
-2. A PDF with scatterplots of all of the plates that underwent genotyping and total scatterplots of the raw and cleaned data
+
+1. A log file with a summary of the dataset (e.g. *SNP1.txt.log*)
+2. A PDF with scatterplots of all of the plates that underwent genotyping and total scatterplots of the raw and cleaned data (e.g. *SNP1.txt.pdf*)
+3. A CSV file containing the processed genotype data (e.g. *SNP1.txtclean.csv*)
 
 ####Log file
 
@@ -113,3 +115,123 @@ Allele Y freqency: 0.5543164
 Minor allele is: X
 
 ```
+
+##KASPar_annotate.R
+> To add allele information to cleaned CSV files with genotpye data
+
+###Input
+A cleaned CSV file with genotype data produced by KASPar_process():
+```
+head SNP1.txtclean.csv
+
+"SID","Call","X.Fluor","Y.Fluor"
+"100-5001","Both Alleles",3.12140191401555,2.52532041325145
+"100-5002","Allele X",3.49869861144719,0.754659786030618
+"100-5003","Both Alleles",2.73446946476066,2.19985079057008
+"100-5004","Allele Y",0.873242389355671,2.64290033708375
+"100-5005","Both Alleles",2.72005190329054,2.12250154310087
+"100-5006","Both Alleles",3.11544896061942,2.47444093367094
+"100-5007","Allele Y",0.911502060072728,2.5749911231616
+"100-5008","Allele Y",0.839293863530369,2.80873076179237
+"100-5009","Both Alleles",3.20637720762011,2.50169945236819
+
+```
+###Run Function
+
+In the same  working directory after running the KASPar_process() function, you can edit the default allele codes of the cleaned CSV file using KASPar_annotate():
+
+There are 5 parameters for the function:
+
+1. The CSV filename
+2. The reference major allele code (default = "A1")
+3. The reference minor allele code (default = "A1")
+4. The variant rs identification number (default = "rs123456")
+5. The strand orientation of the allele coding (.g. FWD or REV)
+
+```
+KASPar_annotate("SNP1.txtclean.csv", 
+                RefMajor="A2", 
+                RefMinor="A1", 
+                rsid="rs123456", 
+                direction=NA)
+```
+
+This will produce an output .txt file with the name of the rsid chosen or the default.
+
+For example
+```
+head rs123456.txt
+
+SID Geno A1 A2 rsid Dir
+A1 CT C T rs123456 NA
+A2 CT C T rs123456 NA
+A3 CT C T rs123456 NA
+A4 TT T T rs123456 NA
+A5 CT C T rs123456 NA
+A6 CT C T rs123456 NA
+A7 CT C T rs123456 NA
+A8 CT C T rs123456 NA
+A9 CC C C rs123456 NA
+
+```
+
+##KASPar_plink.R
+> If you want to create a PED and MAP file for analysis using PLINK using data for several variants
+
+###Input
+This function takes in two input files 
+
+1. A samples file
+2. A MAP file
+
+###Sample file
+The sample file contains information on all of the samples that you want in your final PED file.  Hence, it is essentially the first six columns of a ped file with a header line.
+
+Please use the same gender and phenotype coding schema as for plink (e.g. Males=1, Females=2, Unknown =0)
+
+For example:
+```
+head sample.txt
+
+FID	SID	PID	MID	Gender	All
+1	100-5001	0	0	2	2
+2	100-5002	0	0	1	2
+3	100-5003	0	0	1	2
+4	100-5004	0	0	1	2
+5	100-5005	0	0	2	2
+6	100-5006	0	0	2	0
+7	100-5007	0	0	2	2
+8	100-5008	0	0	1	2
+9	100-5009	0	0	1	2
+10	100-5010	0	0	2	2
+
+```
+###MAP file
+The MAP file is exactly the same as a PLINK format file where:
+
+1. 1st column = chromosome
+2. 2nd column = (**N.B. It is very important that these rsid are identical to the processed .txt files from the previous two functions **)
+3. 3rd column = variant size in centimorgans
+4. 4th column = genomic coordinates of variant
+
+For example:
+```
+head example.map
+
+7	rs11082773	0	47221491
+3	rs28350	0	42418446
+4	rs153409	0	16790483
+10	rs36056997	0	49664218
+1	rs4027132	0	29467931
+2	rs9861686	0	12037492
+
+```
+###Run Function
+
+```
+KASPar_plink(samples, 
+             "samples.txt")
+
+```
+**N.B. You dont need the .MAP suffix for the name of the map file in this function**
+
