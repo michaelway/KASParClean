@@ -2,6 +2,9 @@
 
 > KASPar clean is an R package created to speed up the processing of fluorescence genotyping data produced by a LightCycler480.
 
+##Dependencies
+**NONE**
+
 ##Install
 
 To easily install the KASParClean package, install and run the devtools package and run the below in an R window:
