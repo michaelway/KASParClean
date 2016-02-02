@@ -208,6 +208,9 @@ FID	SID	PID	MID	Gender	All
 10	100-5010	0	0	2	2
 
 ```
+**N.B. The sample IDs must match those given in the earlier files exactly otherwise this will produce a blank ped file**
+
+
 ###MAP file
 The MAP file is exactly the same as a PLINK format file where:
 
