@@ -212,7 +212,7 @@ FID	SID	PID	MID	Gender	All
 The MAP file is exactly the same as a PLINK format file where:
 
 1. 1st column = chromosome
-2. 2nd column = (**N.B. It is very important that these rsid are identical to the processed .txt files from the previous two functions **)
+2. 2nd column = Variants names **N.B. It is very important that these rsid are identical to the processed to the names of the .txt files from the previous function otherwise it wont work**
 3. 3rd column = variant size in centimorgans
 4. 4th column = genomic coordinates of variant
 
