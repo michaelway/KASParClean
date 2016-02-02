@@ -184,6 +184,8 @@ This function takes in two input files
 1. A samples file
 2. A MAP file
 
+**This function must be run after you have run the previous two functions for all of the variants that you are interested in analysing in PLINK.**
+
 ###Sample file
 The sample file contains information on all of the samples that you want in your final PED file.  Hence, it is essentially the first six columns of a ped file with a header line.
 
