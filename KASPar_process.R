@@ -104,8 +104,24 @@ KASPar_process <- function(KASPar){
   print(raw)
   
   #Calculate major and minor allele frequencies
-  Xfreq=as.numeric((raw[3]+(2*raw[1]))/(2*sum(raw[1:3])))
-  Yfreq=as.numeric((raw[3]+(2*raw[2]))/(2*sum(raw[1:3])))
+  rawframe=as.data.frame(raw, stringsAsFactors=FALSE)
+  
+  if (!"Both Alleles" %in% rawframe$Var1){
+      rawframe[nrow(rawframe)+1,] <- c("Both alleles", 0)
+  }
+  if (!"Allele X" %in% rawframe$Var1){
+      rawframe[nrow(rawframe)+1,] <- c("Allele X", 0)
+  }
+  if (!"Allele Y" %in% rawframe$Var1){
+      rawframe[nrow(rawframe)+1,] <- c("Allele Y", 0)
+  }
+
+  print(rawframe, row.names = FALSE)
+  
+  #Calculate major and minor allele frequencies
+  Xfreq=(((2*(as.numeric(subset(rawframe$Freq, rawframe$Var1=="Allele X"))))+(as.numeric(subset(rawframe$Freq, rawframe$Var1 == "Both Alleles")))))/((2*(sum(as.numeric(rawframe$Freq)))))
+  Yfreq=(((2*(as.numeric(subset(rawframe$Freq, rawframe$Var1=="Allele Y"))))+(as.numeric(subset(rawframe$Freq, rawframe$Var1 == "Both Alleles")))))/((2*(sum(as.numeric(rawframe$Freq)))))
+
   
   if(Xfreq<Yfreq){
     MajA=c("Y")
