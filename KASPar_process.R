@@ -79,10 +79,12 @@ KASPar_process <- function(KASPar){
   cat("Conflicting samples are :\n", conflicts)
   
   #Remove all conflicting samples from data
-  
+  if (length(conflicts)>0)
+  {
   for(i in 1:length(conflicts))
   {
     clean=subset(clean, X.Sample.Name.!=conflicts[i])
+  }
   }
   
   clean$Dup2=duplicated(clean$X.Sample.Name.)
