@@ -10,6 +10,11 @@
 To easily install the KASParClean package, install and run the devtools package and run the below in an R window:
 ```
 install.packages("devtools")
+
+# Update devtools to the latest version, on Linux and Mac
+# On Windows, this won't work - see ?build_github_devtools
+install_github("hadley/devtools")
+
 library(devtools)
 install_github("michaelway/KASParClean")
 library(KASParClean)
