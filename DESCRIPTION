@@ -5,9 +5,10 @@ Version: 1.0
 Date: 2015-09-24
 Author: Michael Way
 Description: This software cleans raw KASPar genotyping
-  data produced by the lightcycler480 removing conflicts,
-  duplicates, and negative samples, calculates some
-  useful summary statistics in the log file and creates a
-  pdf document containing cluster plots of the inup raw and
-  cleaned data.
+    data produced by the lightcycler480 removing conflicts,
+    duplicates, and negative samples, calculates some
+    useful summary statistics in the log file and creates a
+    pdf document containing cluster plots of the inup raw and
+    cleaned data.
 License: None
+RoxygenNote: 5.0.1
