@@ -1,6 +1,5 @@
 # KASParclean
-
-> KASPar clean is an R package created to speed up the processing of fluorescence genotyping data produced by a LightCycler480.
+An R package which speeds up the processing of endpoint-genotyping data files exported from a LightCycler480.
 
 ##Dependencies
 **NONE**
