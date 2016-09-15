@@ -5,6 +5,9 @@
 #' @param rsid - The SNP identification number (is used to name the output)
 #' @param direction - The direction of the allele codes (e.g. FWD, REV)
 #' @return A text file with genotype and allele annotations
+#' @export
+#' @example
+#' KASPar_annotate("SNP1.txtclean.csv")
 
 
 KASPar_annotate <- function(csv, 

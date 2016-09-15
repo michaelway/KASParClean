@@ -13,6 +13,7 @@ KASPar_process(KASPar)
 }
 \value{
 A log file, a PDF and a CSV with the cleaned data
+KASPar_process()
 }
 \description{
 Processes raw roche LightCycler 480 endpoint read genotype data and converts this into a csv file

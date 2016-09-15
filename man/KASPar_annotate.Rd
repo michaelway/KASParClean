@@ -20,6 +20,7 @@ KASPar_annotate(csv, RefMajor = "A2", RefMinor = "A1", rsid = "rs123456",
 }
 \value{
 A text file with genotype and allele annotations
+KASPar_annotate()
 }
 \description{
 Process a SNPs cleaned genotype data from csv format

@@ -4,6 +4,7 @@
 #' @param name - the prefix of the ped and map file
 #' @param sample - a text file containing the first 6 lines of the ped file
 #' @return A PED file
+#' KASPar_plink()
 
 
 KASPar_plink <- function(name,
