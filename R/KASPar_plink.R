@@ -5,8 +5,6 @@
 #' @param sample - a text file containing the first 6 lines of the ped file
 #' @return A PED file
 #' @export
-#' @example
-#' KASPar_plink(KASPar_plink(samples, "samples.txt")
 
 
 KASPar_plink <- function(name,

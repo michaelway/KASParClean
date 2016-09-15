@@ -13,7 +13,6 @@ KASPar_plink(name, samples)
 }
 \value{
 A PED file
-KASPar_plink()
 }
 \description{
 Converts several KASPar annotated  CSV files into a single PED file
