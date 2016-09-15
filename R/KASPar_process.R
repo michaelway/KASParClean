@@ -3,7 +3,9 @@
 #' plots for error checking.
 #' @param csv - The name of the input csv file
 #' @return A log file, a PDF and a CSV with the cleaned data
-#' KASPar_process()
+#' @export
+#' @example
+#' KASPar_process("SNP1.txt")
 
 
 KASPar_process <- function(KASPar){
