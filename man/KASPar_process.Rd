@@ -2,21 +2,27 @@
 % Please edit documentation in R/KASPar_process.R
 \name{KASPar_process}
 \alias{KASPar_process}
-\title{Processes raw roche LightCycler 480 endpoint read genotype data and converts this into a csv file
-and removes unknown, duplicate and .  It also produces a log file and a PDF containing scatter
-plots for error checking.}
+\title{KASPar_process}
 \usage{
-KASPar_process(KASPar)
+KASPar_process(KASPar, output = TRUE)
 }
 \arguments{
-\item{csv}{- The name of the input csv file}
+\item{KASPar:}{string. The name of the input LightCycler480 .txt file}
+
+\item{output:}{logical.  Do you want an output .pdf .log and .clean.csv file or to just print qc info to the console?}
 }
 \value{
-A log file, a PDF and a CSV with the cleaned data
+If output is true, a log file, a PDF and a CSV with the cleaned data
 }
 \description{
 Processes raw roche LightCycler 480 endpoint read genotype data and converts this into a csv file
 and removes unknown, duplicate and .  It also produces a log file and a PDF containing scatter
 plots for error checking.
+}
+\examples{
+KASPar_process(KASPar="examples/SNP1.txt", output = FALSE)
+}
+\author{
+Michael Way
 }
 

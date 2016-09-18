@@ -2,7 +2,7 @@
 % Please edit documentation in R/KASPar_plink.R
 \name{KASPar_plink}
 \alias{KASPar_plink}
-\title{Converts several KASPar annotated  CSV files into a single PED file}
+\title{KASPar_plink}
 \usage{
 KASPar_plink(name, samples)
 }
@@ -21,5 +21,8 @@ Converts several KASPar annotated  CSV files into a single PED file
 This software requires a sample file with the first 6 columns of a ped file
 
 and a map file with the names of variants
+}
+\author{
+Michael Way
 }
 

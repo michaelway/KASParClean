@@ -2,26 +2,34 @@
 % Please edit documentation in R/KASPar_annotate.R
 \name{KASPar_annotate}
 \alias{KASPar_annotate}
-\title{Process a SNPs cleaned genotype data from csv format}
+\title{KASPar_annotate()}
 \usage{
 KASPar_annotate(csv, RefMajor = "A2", RefMinor = "A1", rsid = "rs123456",
   direction = NA)
 }
 \arguments{
-\item{csv}{The name of the input csv file}
+\item{csv:}{string. name - the prefix of the ped and map file}
 
-\item{RefMajor}{- The reference major allele (e.g. A, G, T, C)}
+\item{RefMajor:}{string. The reference major allele (e.g. A, G, T, C)}
 
-\item{RefMinor}{- The reference minor allele (e.g. A, G, T, C)}
+\item{RefMinor:}{string. The reference minor allele (e.g. A, G, T, C)}
 
-\item{rsid}{- The SNP identification number (is used to name the output)}
+\item{rsid:}{string. The SNP identification number (is used to name the output)}
 
-\item{direction}{- The direction of the allele codes (e.g. FWD, REV)}
+\item{direction:}{string. The direction of the allele codes (e.g. FWD, REV)}
 }
 \value{
 A text file with genotype and allele annotations
 }
 \description{
-Process a SNPs cleaned genotype data from csv format
+Converts several KASPar annotated  CSV files into a single PED file
+}
+\note{
+This software requires a sample file with the first 6 columns of a ped file
+
+and a map file with the names of variants
+}
+\author{
+Michael Way
 }
 

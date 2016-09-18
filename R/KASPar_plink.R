@@ -1,9 +1,11 @@
-#' Converts several KASPar annotated  CSV files into a single PED file
+#' @title KASPar_plink
+#' @description Converts several KASPar annotated  CSV files into a single PED file
 #' @note This software requires a sample file with the first 6 columns of a ped file
 #' @note and a map file with the names of variants
-#' @param name - the prefix of the ped and map file
-#' @param sample - a text file containing the first 6 lines of the ped file
+#' @param name: string. Prefix of .map file
+#' @param sample: string. snp.txt file produced by 
 #' @return A PED file
+#' @author Michael Way
 #' @export
 
 

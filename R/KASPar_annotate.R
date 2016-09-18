@@ -1,12 +1,15 @@
-#' Process a SNPs cleaned genotype data from csv format
-#' @param csv The name of the input csv file
-#' @param RefMajor - The reference major allele (e.g. A, G, T, C)
-#' @param RefMinor - The reference minor allele (e.g. A, G, T, C)
-#' @param rsid - The SNP identification number (is used to name the output)
-#' @param direction - The direction of the allele codes (e.g. FWD, REV)
+#' @title KASPar_annotate()
+#' @description Converts several KASPar annotated  CSV files into a single PED file
+#' @note This software requires a sample file with the first 6 columns of a ped file
+#' @note and a map file with the names of variants
+#' @param csv: string. name - the prefix of the ped and map file
+#' @param RefMajor: string. The reference major allele (e.g. A, G, T, C)
+#' @param RefMinor: string. The reference minor allele (e.g. A, G, T, C)
+#' @param rsid: string. The SNP identification number (is used to name the output)
+#' @param direction: string. The direction of the allele codes (e.g. FWD, REV)
+#' @author Michael Way
 #' @return A text file with genotype and allele annotations
 #' @export
-
 
 KASPar_annotate <- function(csv, 
                             RefMajor="A2", 

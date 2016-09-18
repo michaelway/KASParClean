@@ -1,16 +1,27 @@
-#' Processes raw roche LightCycler 480 endpoint read genotype data and converts this into a csv file
+#' @title KASPar_process
+#' @description Processes raw roche LightCycler 480 endpoint read genotype data and converts this into a csv file
 #' and removes unknown, duplicate and .  It also produces a log file and a PDF containing scatter
 #' plots for error checking.
-#' @param csv - The name of the input csv file
-#' @return A log file, a PDF and a CSV with the cleaned data
+#' @param KASPar: string. The name of the input LightCycler480 .txt file
+#' @param output: logical.  Do you want an output .pdf .log and .clean.csv file or to just print qc info to the console?
+#' @return If output is true, a log file, a PDF and a CSV with the cleaned data
+#' @examples
+#' KASPar_process(KASPar="examples/SNP1.txt", output = FALSE)
+#' @author Michael Way
 #' @export
 
-
-KASPar_process <- function(KASPar){
-
-  log <-paste(KASPar,".log", sep="")
+KASPar_process <- function(KASPar,
+                           output = TRUE){
   
-  sink(log)  
+  #Remove file suffix
+  KASParNoTxt <- sub("^([^.]*).*", "\\1", KASPar) 
+
+  log <-paste(KASParNoTxt,".log", sep="")
+  
+  if(output==TRUE){
+    sink(log)
+  }
+    
   
   cat("#######################################\n")
   cat("#######################################\n\n")
@@ -132,15 +143,20 @@ KASPar_process <- function(KASPar){
     MinA=c("Y")
   }
   
-  cat("\n\nAllele X frequency:", Xfreq)
-  cat("\nAllele Y freqency:", Yfreq)
+  cat("\n\nAllele X frequency:", round(Xfreq, 2))
+  cat("\nAllele Y freqency:", round(Yfreq, 2))
   cat("\nMinor allele is:", MinA)
   
+
+  if(output==TRUE){
   
-  plot<-paste(KASPar,".pdf", sep="")
+  plot<-paste(KASParNoTxt,".pdf", sep="")
   
   pdf(plot)
-  par(mfrow = c(length(unique(data$X.Experiment.Name.))/2, 2))
+  par(mfrow = c(length(unique(data$X.Experiment.Name.))/2, 2),  
+      oma = c(5,4,0,0) + 0.1,
+      mar = c(0,0,1,1) + 0.3,
+      xpd = NA)
   pal<-palette(c("blue", "Green", "Red", "grey", "deeppink"))
   palette(c("blue", "Green", "Red", "grey", "deeppink"))
   #par(cex = 0.6)
@@ -153,28 +169,35 @@ KASPar_process <- function(KASPar){
     x<-with(data, X.Fluor[X.Experiment.Name. == i])
     y<-with(data, Y.Fluor[X.Experiment.Name. == i])
     call<-with(data, Call[X.Experiment.Name. == i])
-    plot(x, y, col = as.factor(call), xlab="X fluorescence",ylab="Y fluorescence", main=i, pch=16,cex=0.55)
-    legend('topright', legend=levels(as.factor(data$Call)) , pch =16, col=pal, cex=.55)
+    plot(x, y, col = as.factor(call), axes=FALSE, frame.plot=TRUE, xlab=NA,ylab=NA, pch=16,cex=0.2)
+    title(main=i, cex.main=1)
+    legend('topright', legend=levels(as.factor(data$Call)) , pch =16, col=pal, cex=0.35)
   }
   rm(i,x, y, call)
   par(mfrow = c(2, 1))
+  
   plot(data$X.Fluor, data$Y.Fluor, col = as.factor(data$Call), xlab="X fluorescence",ylab="Y fluorescence", main="raw data", pch=16,cex=0.55)
   legend('topright', legend=levels(as.factor(data$Call)) , pch =16, col=pal, cex=.55)
   plot(clean$X.Fluor, clean$Y.Fluor, col = as.factor(clean$Call), xlab="X fluorescence",ylab="Y fluorescence", main="clean data", pch=16,cex=0.55)
   legend('topright', legend=levels(as.factor(clean$Call)) , pch =16, col=pal, cex=.55)
   dev.off()
+
+  }
   
-  
-  
-  out<-paste(KASPar,"clean.csv", sep="")
+  out<-paste(KASParNoTxt,".clean.csv", sep="")
   
   
   #Make the dataframe pretty for the CSV output
+  if(output==TRUE){
   names(clean)[1] = "SID"
   clean$Position=NULL
   clean$dup=NULL
   clean$Dup2=NULL
   write.csv(clean, file=out, row.names=FALSE)
+  }
   
-sink(NULL)
+  if(output==TRUE){
+    sink(NULL)
+  }
+
 }
